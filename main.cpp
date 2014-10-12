@@ -1,3 +1,8 @@
+/**
+ * Christos Gogos (2014)
+ *
+ *
+ */
 #include <fstream>
 #include <iostream>
 using namespace std;
