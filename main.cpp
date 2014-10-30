@@ -61,18 +61,6 @@ void print_conflict_density() {
 
 void read_problem_data(string problem) {
 	string stu_fn = "";
-	if (stu_fn != "") {
-		delete[] crs_per_stu_n;
-		for (int i = 0; i < stu_no + 1; i++)
-			delete[] crs_per_stu[i];
-		delete[] crs_per_stu;
-
-		delete[] stu_per_crs_n;
-		for (int i = 0; i < crs_no + 1; i++)
-			delete[] stu_per_crs[i];
-		delete[] stu_per_crs;
-	}
-
 	if (problem == "CAR91") {
 		stu_fn = "car-s-91.stu";
 		stu_no = 16925;
