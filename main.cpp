@@ -125,7 +125,7 @@ void read_problem_data(string problem) {
 			int students = stu_per_crs_n[i];
 			stu_per_crs[i] = new int[students]();
 		}
-		int temp[crs_no] = { 0 };
+		int temp[crs_no + 1] = { 0 };
 		for (int i = 1; i < stu_no + 1; i++) {
 			for (int j = 0; j < crs_per_stu_n[i]; j++) {
 				int k = crs_per_stu[i][j];
@@ -169,10 +169,10 @@ int main(int argc, char **argv) {
 			cout << "Δώσε όνομα προβλήματος[CAR91|KFU93|LSE91|TRE92|UTE92]: ";
 			cin >> prob;
 			read_problem_data(prob);
-			test1();
-			test2();
-			test3();
-			test4();
+			test1(); // πρόκειται να φύγει
+			test2(); // πρόκειται να φύγει
+			test3(); // πρόκειται να φύγει
+			test4(); // πρόκειται να φύγει
 			print_conflict_density();
 			exit(-1); // πρόκειται να φύγει
 			break;
@@ -188,6 +188,20 @@ int main(int argc, char **argv) {
 		case 5:
 			cout << "Δεν έχει υλοποιηθεί ακόμα" << endl;
 			break;
+		case 6: {
+			// hidden choice
+			cout << "stress test!" << endl;
+			list<string> problems;
+			problems.push_back("CAR91");
+			problems.push_back("KFU93");
+			problems.push_back("LSE91");
+			for (string p : problems) {
+				read_problem_data(p);
+				cout << p << ": ";
+				print_conflict_density();
+			}
+			exit(1);
+		}
 		default:
 			cout << "Λάθος επιλογή. Προσπαθήστε ξανά!" << endl;
 		}
