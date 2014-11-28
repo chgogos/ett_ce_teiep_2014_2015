@@ -21,34 +21,6 @@ int* stu_per_crs_n; // πίνακας με τον αριθμό των σπουδ
 int** stu_per_crs; // 2Δ πίνακας με τους αριθμούς των σπουδαστών ανά μάθημα
 int** conflict_matrix; // 2Δ πίνακας συγκρούσεων
 
-void test1() {
-	for (int i = 0; i < stu_no + 1; i++)
-		printf("%d %d\n", i, crs_per_stu_n[i]);
-}
-
-void test2() {
-	for (int i = 0; i < crs_no + 1; i++)
-		printf("%d %d\n", i, stu_per_crs_n[i]);
-}
-
-void test3() {
-	for (int i = 1; i < stu_no + 1; i++) {
-		printf("Student %d :", i);
-		for (int j = 0; j < crs_per_stu_n[i]; j++)
-			printf("%d ", crs_per_stu[i][j]);
-		printf("\n");
-	}
-}
-
-void test4() {
-	for (int i = 1; i < crs_no + 1; i++) {
-		printf("Course %d :", i);
-		for (int j = 0; j < stu_per_crs_n[i]; j++)
-			printf("%d ", stu_per_crs[i][j]);
-		printf("\n");
-	}
-}
-
 void print_conflict_density() {
 	int c = 0;
 	for (int i = 1; i < crs_no + 1; i++)
@@ -61,7 +33,12 @@ void print_conflict_density() {
 
 void read_problem_data(string problem) {
 	string stu_fn = "";
-	if (problem == "CAR91") {
+	if (problem == "CAR91-II") {
+		stu_fn = "car-s-91-II.stu";
+		stu_no = 16925;
+		crs_no = 682;
+		per_no = 35;
+	} else if (problem == "CAR91") {
 		stu_fn = "car-s-91.stu";
 		stu_no = 16925;
 		crs_no = 682;
@@ -76,6 +53,16 @@ void read_problem_data(string problem) {
 		stu_no = 2726;
 		crs_no = 381;
 		per_no = 18;
+	} else if (problem == "TRE92") {
+		stu_fn = "tre-s-92.stu";
+		stu_no = 4360;
+		crs_no = 261;
+		per_no = 23;
+	} else if (problem == "UTE92") {
+		stu_fn = "ute-s-92.stu";
+		stu_no = 2750;
+		crs_no = 184;
+		per_no = 10;
 	} else {
 		cerr << "Not implemented";
 		exit(-1);
@@ -125,7 +112,9 @@ void read_problem_data(string problem) {
 			int students = stu_per_crs_n[i];
 			stu_per_crs[i] = new int[students]();
 		}
-		int temp[crs_no + 1] = { 0 };
+		int temp[crs_no + 1];
+		for (int i = 0; i <= crs_no; i++)
+			temp[i] = 0;
 		for (int i = 1; i < stu_no + 1; i++) {
 			for (int j = 0; j < crs_per_stu_n[i]; j++) {
 				int k = crs_per_stu[i][j];
@@ -166,15 +155,11 @@ int main(int argc, char **argv) {
 		cin >> choice;
 		switch (choice) {
 		case 1:
-			cout << "Δώσε όνομα προβλήματος[CAR91|KFU93|LSE91|TRE92|UTE92]: ";
+			cout
+					<< "Δώσε όνομα προβλήματος[CAR91-II|CAR91|KFU93|LSE91|TRE92|UTE92]: ";
 			cin >> prob;
 			read_problem_data(prob);
-			test1(); // πρόκειται να φύγει
-			test2(); // πρόκειται να φύγει
-			test3(); // πρόκειται να φύγει
-			test4(); // πρόκειται να φύγει
 			print_conflict_density();
-			exit(-1); // πρόκειται να φύγει
 			break;
 		case 2:
 			cout << "Δεν έχει υλοποιηθεί ακόμα" << endl;
@@ -186,22 +171,7 @@ int main(int argc, char **argv) {
 			cout << "Δεν έχει υλοποιηθεί ακόμα" << endl;
 			break;
 		case 5:
-			cout << "Δεν έχει υλοποιηθεί ακόμα" << endl;
 			break;
-		case 6: {
-			// hidden choice
-			cout << "stress test!" << endl;
-			list<string> problems;
-			problems.push_back("CAR91");
-			problems.push_back("KFU93");
-			problems.push_back("LSE91");
-			for (string p : problems) {
-				read_problem_data(p);
-				cout << p << ": ";
-				print_conflict_density();
-			}
-			exit(1);
-		}
 		default:
 			cout << "Λάθος επιλογή. Προσπαθήστε ξανά!" << endl;
 		}
