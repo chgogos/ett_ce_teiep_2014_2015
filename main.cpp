@@ -33,6 +33,12 @@ void print_conflict_density() {
 
 void read_problem_data(string problem) {
 	string stu_fn = "";
+	if (problem == "TINY") {
+		stu_fn = "tiny.stu";
+		stu_no = 10;
+		crs_no = 5;
+		per_no = 5;
+	}
 	if (problem == "CAR91-II") {
 		stu_fn = "car-s-91-II.stu";
 		stu_no = 16925;
@@ -156,7 +162,7 @@ int main(int argc, char **argv) {
 		switch (choice) {
 		case 1:
 			cout
-					<< "Δώσε όνομα προβλήματος[CAR91-II|CAR91|KFU93|LSE91|TRE92|UTE92]: ";
+					<< "Δώσε όνομα προβλήματος[TINY|CAR91-II|CAR91|KFU93|LSE91|TRE92|UTE92]: ";
 			cin >> prob;
 			read_problem_data(prob);
 			print_conflict_density();
