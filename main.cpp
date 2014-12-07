@@ -38,8 +38,7 @@ void read_problem_data(string problem) {
 		stu_no = 10;
 		crs_no = 5;
 		per_no = 5;
-	}
-	if (problem == "CAR91-II") {
+	} else if (problem == "CAR91-II") {
 		stu_fn = "car-s-91-II.stu";
 		stu_no = 16925;
 		crs_no = 682;
